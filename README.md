@@ -1,2 +1,3 @@
-# attriba
-Tools for Managing Unstructured Data (Labels &amp; Tags) In APIs, DBs, etc.
+# Attriba
+
+Tools for Managing Unstructured Data (Labels & Tags) In APIs, DBs, etc.
