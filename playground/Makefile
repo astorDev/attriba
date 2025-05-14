@@ -4,6 +4,9 @@ prep:
 run:
 	dotnet run
 
+kill:
+	kill `lsof -t -i:5013`
+
 yac:
 	httpyac send $(NAME).http --all --env=local
 

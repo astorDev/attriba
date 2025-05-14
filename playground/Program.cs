@@ -22,6 +22,16 @@ app.MapPut("/resources/{id}", async (string id, ResourceCandidate candidate, Db 
     return saved.ToResource();
 });
 
+app.MapPatch("/resources/{id}", async (string id, ResourceCandidate candidate, Db db) => {
+    var record = await db.Records.Search(id) ?? throw new KeyNotFoundException($"Resource with id `{id}` not found");
+    
+    record.Labels = Merge.Of(record.Labels, candidate.Labels).AsJsonDocument();
+    
+    await db.SaveChangesAsync();
+
+    return record.ToResource();
+});
+
 app.MapGet("/resources/{id}", async (string id, Db db) => {
     var record = await db.Records.Search(id) ?? throw new KeyNotFoundException($"Resource with id `{id}` not found");
     return record.ToResource();
