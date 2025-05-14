@@ -1,0 +1,17 @@
+name: Attriba NuGet
+on:
+  push:
+    paths:
+      - 'lib/**'
+      - '.github/workflows/nuget.yaml'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Pack & Publish nuget
+    runs-on: ubuntu-latest
+    steps:
+      - uses: astorDev/versy/calver/nuget@main
+        with:
+          project: lib/Attriba
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
