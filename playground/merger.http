@@ -1,0 +1,18 @@
+PUT /resources/merger
+
+{
+    "labels" : {
+        "name" : "merger",
+        "status" : "pending"
+    }
+}
+
+###
+PATCH /resources/merger
+
+{
+    "labels" : {
+        "status" : "done",
+        "mood" : "happy"
+    }
+}
