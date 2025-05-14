@@ -1,6 +1,7 @@
 using System.Text.Json;
 using Attriba;
 using Microsoft.EntityFrameworkCore;
+using Nist;
 using Persic;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +38,14 @@ app.MapGet("/resources/{id}", async (string id, Db db) => {
     return record.ToResource();
 });
 
+app.MapGet("/resources", async ([AsParameters] ResourceQuery query, Db db) => {
+    var records = await db.Records
+        .FilteredByLabels(query.Labels)
+        .ToListAsync();
+
+    return records.Select(r => r.ToResource());
+});
+
 app.Run();
 
 public record ResourceCandidate(
@@ -48,7 +57,12 @@ public record Resource(
     Dictionary<string, string> Labels
 );
 
-public class Record : IDbEntity<string> {
+public record ResourceQuery(
+    DictionaryQueryParameters Labels
+);
+
+public class Record : IDbEntity<string>, IRecordWithJsonLabels 
+{
     public string Id { get; set; } = null!;
     public required JsonDocument Labels { get; set; }
 
