@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - 'lib/**'
-      - '.github/workflows/nuget.yaml'
+      - '.github/workflows/nuget.yml'
   workflow_dispatch:
 
 jobs:
