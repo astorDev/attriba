@@ -1,0 +1,67 @@
+PUT /resources/1
+
+{
+    "labels" : {
+        "number" : "one"
+    }
+}
+
+###
+PUT /resources/2
+
+{
+    "labels" : {
+        "number" : "two"
+    }
+}
+
+###
+PUT /resources/1-gentlemen
+
+{
+    "labels" : {
+        "number" : "one",
+        "type" : "gentlemen"
+    }
+}
+
+###
+PUT /resources/1-lady
+
+{
+    "labels" : {
+        "number" : "one",
+        "type" : "lady"
+    }
+}
+
+###
+PUT /resources/2-lady
+
+{
+    "labels" : {
+        "number" : "two",
+        "type" : "lady"
+    }
+}
+
+###
+GET /resources
+
+###
+GET /resources?labels.unpresent=x
+
+###
+GET /resources?labels.number=two
+
+###
+GET /resources?labels.number=one
+
+###
+GET /resources?labels.number=one&labels.type=gentlemen
+
+###
+GET /resources?labels.type=lady,gentlemen
+
+###
+GET /resources?labels.type~number=lady~two,gentlemen~one
