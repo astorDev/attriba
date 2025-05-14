@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: attriba
+      POSTGRES_PASSWORD: attriba
+      POSTGRES_DB: attriba
+    ports:
+      - "2442:5432"

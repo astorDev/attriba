@@ -1,0 +1,11 @@
+PUT /resources/one
+
+{
+    "labels" : {
+        "name" : "one",
+        "status" : "active"
+    }
+}
+
+###
+GET /resources/one
