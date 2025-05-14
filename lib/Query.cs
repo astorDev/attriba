@@ -29,18 +29,10 @@ public static class LabelsQueryableExtensions
             LabelSpecification<TRecord>.FromPair
         );
 
-        var predicates = labelQueryParameters
-            .Select(parser.Parse)
-            .Select(predicate => predicate.ToExpression());
+        var specifications = labelQueryParameters.Select(parser.Parse);
 
-        return source.Where(predicates);
-    }
+        var specification = new AndSpecification<TRecord>(specifications);
 
-    public static IQueryable<TRecord> Where<TRecord>(
-        this IQueryable<TRecord> source,
-        IEnumerable<Expression<Func<TRecord, bool>>> predicates
-    )
-    {
-        return predicates.Aggregate(source, (current, predicate) => current.Where(predicate));
+        return source.Where(specification);
     }
 }
